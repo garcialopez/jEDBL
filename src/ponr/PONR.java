@@ -99,14 +99,14 @@ public class PONR {
     /**
      * @return the restriccionesD
      */
-    public double[] getRestriccionesD() {
+    public double[] getResDesigualdad() {
         return restriccionesD;
     }
 
     /**
      * @param restriccionesD the restriccionesD to set
      */
-    public void setRestriccionesD(double[] restriccionesD) {
+    public void setResDesigualdad(double[] restriccionesD) {
         this.restriccionesD = restriccionesD;
     }
 
@@ -176,21 +176,23 @@ public class PONR {
     /**
      * @param compRestriccion the compRestriccion to set
      */
-    public void setCompRestriccion(double[] compRestriccion) {
+    public void setComparacionRestriccion(double[] compRestriccion) {
         this.compRestriccion = compRestriccion;
     }
 
     /**
      * @return the existePertenencia
      */
-    public boolean[] isExistePertenencia() {
+    public boolean[] isVariableDiscreta() {
         return existePertenencia;
     }
 
     /**
+     * Método que asigna true si la variable es discreta, caso contrario, es false.
+     * 
      * @param existePertenencia the existePertenencia to set
      */
-    public void setExistePertenencia(boolean[] existePertenencia) {
+    public void setVariableDiscreta(boolean[] existePertenencia) {
         this.existePertenencia = existePertenencia;
     }
 

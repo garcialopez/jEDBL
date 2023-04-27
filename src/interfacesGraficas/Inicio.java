@@ -30,11 +30,11 @@ import ponr.SintesisProcesosYuan88;
  */
 public class Inicio extends javax.swing.JFrame {
 
-    private EvolucionDiferencial ed;
+    private EvolucionDiferencial evolucionDiferencial;
     private PONR ponr;
     private Estadisticas estd;
 
-    private int iteracionesDE = 1;
+    private int iteracionesED = 1;
     private int iteracionesBL = 10;
     private double probabilidadBL = 0.1;
     private String[] cabecera;
@@ -45,7 +45,7 @@ public class Inicio extends javax.swing.JFrame {
         this.sliderIterBL.setValue(10);
         this.sliderProbabilidad.setValue(1);
 
-        this.radioKocis2.doClick();
+        this.cargarPonr(this.boxProblemas.getSelectedIndex());
 
         this.setLocationRelativeTo(null);
         this.setExtendedState(MAXIMIZED_BOTH);
@@ -60,7 +60,6 @@ public class Inicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnGrupo = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -117,18 +116,15 @@ public class Inicio extends javax.swing.JFrame {
         txtTasaFac = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
         txtTasaExito = new javax.swing.JTextField();
-        jLabel32 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel16 = new javax.swing.JPanel();
         jLabel59 = new javax.swing.JLabel();
         jLabel60 = new javax.swing.JLabel();
         sliderIteraciones2 = new javax.swing.JSlider();
         jLabel61 = new javax.swing.JLabel();
-        radioKocis2 = new javax.swing.JRadioButton();
-        radioYuan2 = new javax.swing.JRadioButton();
         lblIterED2 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
+        boxProblemas = new javax.swing.JComboBox<>();
         jPanel15 = new javax.swing.JPanel();
         jLabel64 = new javax.swing.JLabel();
         jLabel65 = new javax.swing.JLabel();
@@ -603,14 +599,12 @@ public class Inicio extends javax.swing.JFrame {
         txtMejor.setText("0.0");
         txtMejor.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         txtMejor.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtMejor.setSelectionColor(new java.awt.Color(0, 0, 204));
 
         txtPeor.setEditable(false);
         txtPeor.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtPeor.setText("0.0");
         txtPeor.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         txtPeor.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtPeor.setSelectionColor(new java.awt.Color(0, 0, 204));
 
         jLabel35.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         jLabel35.setText("Mediana");
@@ -620,7 +614,6 @@ public class Inicio extends javax.swing.JFrame {
         txtMedia.setText("0.0");
         txtMedia.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         txtMedia.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtMedia.setSelectionColor(new java.awt.Color(0, 0, 204));
 
         jLabel34.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         jLabel34.setText("Media");
@@ -630,14 +623,12 @@ public class Inicio extends javax.swing.JFrame {
         txtMediana.setText("0.0");
         txtMediana.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         txtMediana.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtMediana.setSelectionColor(new java.awt.Color(0, 0, 204));
 
         txtSTD.setEditable(false);
         txtSTD.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtSTD.setText("0.0");
         txtSTD.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         txtSTD.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtSTD.setSelectionColor(new java.awt.Color(0, 0, 204));
 
         jLabel27.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         jLabel27.setText("Desviación Estándar");
@@ -650,7 +641,6 @@ public class Inicio extends javax.swing.JFrame {
         txtTasaFac.setText("0.0");
         txtTasaFac.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         txtTasaFac.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtTasaFac.setSelectionColor(new java.awt.Color(0, 0, 204));
 
         jLabel31.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         jLabel31.setText("Tasa de éxito");
@@ -660,17 +650,6 @@ public class Inicio extends javax.swing.JFrame {
         txtTasaExito.setText("0.0");
         txtTasaExito.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         txtTasaExito.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtTasaExito.setSelectionColor(new java.awt.Color(0, 0, 204));
-
-        jLabel32.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        jLabel32.setText("Rendimiento exitoso");
-
-        jTextField8.setEditable(false);
-        jTextField8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField8.setText("100");
-        jTextField8.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
-        jTextField8.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jTextField8.setSelectionColor(new java.awt.Color(0, 0, 204));
 
         javax.swing.GroupLayout panelEstadisticasLayout = new javax.swing.GroupLayout(panelEstadisticas);
         panelEstadisticas.setLayout(panelEstadisticasLayout);
@@ -698,11 +677,9 @@ public class Inicio extends javax.swing.JFrame {
                         .addComponent(jLabel28)
                         .addComponent(txtTasaFac)))
                 .addGap(31, 31, 31)
-                .addGroup(panelEstadisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel32)
+                .addGroup(panelEstadisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel31)
-                    .addComponent(txtTasaExito, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                    .addComponent(jTextField8))
+                    .addComponent(txtTasaExito, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         panelEstadisticasLayout.setVerticalGroup(
@@ -725,10 +702,7 @@ public class Inicio extends javax.swing.JFrame {
                                 .addComponent(jLabel31)
                                 .addGap(3, 3, 3)
                                 .addComponent(txtTasaExito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel32)
-                                .addGap(3, 3, 3)
-                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(43, 43, 43)))
                         .addGap(6, 6, 6)
                         .addComponent(jLabel28)
                         .addGap(3, 3, 3)
@@ -775,32 +749,19 @@ public class Inicio extends javax.swing.JFrame {
 
         jLabel61.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jLabel61.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel61.setText("Problema: síntesis de procesos MINLP");
-
-        radioKocis2.setBackground(new java.awt.Color(245, 245, 245));
-        btnGrupo.add(radioKocis2);
-        radioKocis2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        radioKocis2.setSelected(true);
-        radioKocis2.setText("Kocis and Grossmann (1988)");
-        radioKocis2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioKocisActionPerformed(evt);
-            }
-        });
-
-        radioYuan2.setBackground(new java.awt.Color(245, 245, 245));
-        btnGrupo.add(radioYuan2);
-        radioYuan2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        radioYuan2.setText("Yuan et al. (1888)");
-        radioYuan2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radioYuanActionPerformed(evt);
-            }
-        });
+        jLabel61.setText("Problema de optimización");
 
         lblIterED2.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         lblIterED2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIterED2.setText("1");
+
+        boxProblemas.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        boxProblemas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Process synthesis MINLP Kocis 1998", "Process synthesis MINLP - Yuan 1988" }));
+        boxProblemas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxProblemasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -810,7 +771,6 @@ public class Inicio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel59, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel61, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -820,12 +780,9 @@ public class Inicio extends javax.swing.JFrame {
                                 .addComponent(sliderIteraciones2, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblIterED2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(radioKocis2)
-                                    .addComponent(radioYuan2))))
-                        .addGap(0, 13, Short.MAX_VALUE)))
+                            .addComponent(jLabel61)
+                            .addComponent(boxProblemas, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 17, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel16Layout.setVerticalGroup(
@@ -840,13 +797,11 @@ public class Inicio extends javax.swing.JFrame {
                     .addComponent(lblIterED2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel61)
-                .addGap(3, 3, 3)
-                .addComponent(radioKocis2)
-                .addGap(3, 3, 3)
-                .addComponent(radioYuan2)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGap(19, 19, 19)
+                .addComponent(boxProblemas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Configuración inicial", jPanel16);
@@ -864,7 +819,7 @@ public class Inicio extends javax.swing.JFrame {
         jLabel66.setText("Número de g(x)");
 
         jLabel67.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel67.setText("Variables binarias");
+        jLabel67.setText("Variables discretas");
 
         jLabel68.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel68.setText("Número de h(x)");
@@ -880,56 +835,42 @@ public class Inicio extends javax.swing.JFrame {
         txtD2.setText("0.0");
         txtD2.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         txtD2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtD2.setRequestFocusEnabled(false);
-        txtD2.setSelectionColor(new java.awt.Color(0, 0, 204));
 
         txtFX2.setEditable(false);
         txtFX2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtFX2.setText("0.0");
         txtFX2.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         txtFX2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtFX2.setRequestFocusEnabled(false);
-        txtFX2.setSelectionColor(new java.awt.Color(0, 0, 204));
 
         txtGX2.setEditable(false);
         txtGX2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtGX2.setText("0.0");
         txtGX2.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         txtGX2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtGX2.setRequestFocusEnabled(false);
-        txtGX2.setSelectionColor(new java.awt.Color(0, 0, 204));
 
         txtHX2.setEditable(false);
         txtHX2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtHX2.setText("0.0");
         txtHX2.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         txtHX2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtHX2.setRequestFocusEnabled(false);
-        txtHX2.setSelectionColor(new java.awt.Color(0, 0, 204));
 
         txtVariablesContinuas2.setEditable(false);
         txtVariablesContinuas2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtVariablesContinuas2.setText("0.0");
         txtVariablesContinuas2.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         txtVariablesContinuas2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtVariablesContinuas2.setRequestFocusEnabled(false);
-        txtVariablesContinuas2.setSelectionColor(new java.awt.Color(0, 0, 204));
 
         txtVariablesBinarias2.setEditable(false);
         txtVariablesBinarias2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtVariablesBinarias2.setText("0.0");
         txtVariablesBinarias2.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         txtVariablesBinarias2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtVariablesBinarias2.setRequestFocusEnabled(false);
-        txtVariablesBinarias2.setSelectionColor(new java.awt.Color(0, 0, 204));
 
         txtMejorConocido2.setEditable(false);
         txtMejorConocido2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtMejorConocido2.setText("0.0");
         txtMejorConocido2.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         txtMejorConocido2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtMejorConocido2.setRequestFocusEnabled(false);
-        txtMejorConocido2.setSelectionColor(new java.awt.Color(0, 0, 204));
 
         lblNombreProblema.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblNombreProblema.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -961,7 +902,7 @@ public class Inicio extends javax.swing.JFrame {
                                 .addComponent(jLabel64)
                                 .addGap(68, 68, 68)
                                 .addComponent(txtD2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel15Layout.createSequentialGroup()
                                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1037,12 +978,12 @@ public class Inicio extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(114, 173, 139));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Problemas de optimización de síntesis de");
+        jLabel3.setText("Problemas de optimización");
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(114, 173, 139));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("procesos en ingeniería química");
+        jLabel4.setText("en ingeniería");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -1140,7 +1081,7 @@ public class Inicio extends javax.swing.JFrame {
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
 
         //String nombreEjecucion = this.txtNombreEjecucion.getText();
-        this.ed = new EvolucionDiferencial();
+        this.evolucionDiferencial = new EvolucionDiferencial();
 
         String pob = this.txtMaxPop.getText();
         String cruza = this.txtCR.getText();
@@ -1148,71 +1089,50 @@ public class Inicio extends javax.swing.JFrame {
         String gmaxTxt = this.txtGmax.getText();
 
         //estructura condicional
-        if ((!esNumero(pob) || pob.isEmpty()
-                && !esNumero(cruza) || cruza.isEmpty()
-                && !esNumero(mutacion) || mutacion.isEmpty()
-                && !esNumero(gmaxTxt) || gmaxTxt.isEmpty())) {
+        if ((this.validarCampo(pob) && this.validarCampo(cruza)
+                && this.validarCampo(mutacion) && this.validarCampo(gmaxTxt))) {
 
-            //verdadero
-            JOptionPane.showMessageDialog(null, "Verificar que los valores ingresados sean de tipo numérico.");
-        } else {
-
-            //falso
+            //Si los datos ingresados son correctos, entonces hacemos la conversión.
             int maxPop = Integer.parseInt(pob);
-            double f = Double.parseDouble(this.txtF.getText());
-            double cr = Double.parseDouble(this.txtCR.getText());
-            int gmax = Integer.parseInt(this.txtGmax.getText());
+            double cr = Double.parseDouble(cruza);
+            double f = Double.parseDouble(mutacion);
+            int gmax = Integer.parseInt(gmaxTxt);
 
-//            
-            if ((maxPop >= 10 && maxPop <= 500) 
-                    && (f >=0 && f <=1 )
-                    && (cr >=0 && cr <=1)
-                    && (gmax >=100 && gmax <=1000)
-                )  {
+            //Se realiza la validación de rangos permitidos.
+            if ((maxPop >= 10 && maxPop <= 500) && (f > 0 && f < 1)
+                    && (cr > 0 && cr < 1) && (gmax >= 100 && gmax <= 1000)) {
+                
+                //Establecemos la configuración de parámetros
+                this.evolucionDiferencial.setPoblacion(maxPop);
+                this.evolucionDiferencial.setF(f);
+                this.evolucionDiferencial.setCR(cr);
+                this.evolucionDiferencial.setGmax(gmax);
 
-                ed.setPoblacion(maxPop);
-                ed.setF(f);
-                ed.setCR(cr);
-                ed.setGmax(gmax);
-
-                //Parámetros para BL
-                ed.setPRO_BUS(this.probabilidadBL);
-                ed.setMAX_ITER(this.iteracionesBL);
-
-                ed.iniciar(ponr, this.iteracionesDE);
-
+                //Parámetros para Búsqueda Local
+                this.evolucionDiferencial.setPRO_BUS(this.probabilidadBL);
+                this.evolucionDiferencial.setMAX_ITER(this.iteracionesBL);
+                
+                //Iniciamos el algoritmo
+                this.evolucionDiferencial.iniciar(ponr, this.iteracionesED);
+                
+                //Finalizado el algoritmo, mostramos los resultados
                 this.mostrarTabla();
                 this.mostrarEstadisticas();
                 this.mostrarGrafica();
-                this.btnIniciar.setEnabled(true);
-
-//                JOptionPane.showMessageDialog(null, "dentro del limite");
+                                        
             } else {
                 JOptionPane.showMessageDialog(null, "Verifique los límites en las etiquetas correspondientes. ");
             }
 
-        } // cierra else
-
-
+        } else {
+            JOptionPane.showMessageDialog(null, "Verificar que los valores ingresados sean de tipo numérico.");
+        }
 
     }//GEN-LAST:event_btnIniciarActionPerformed
 
-    private void radioYuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioYuanActionPerformed
-        if (this.radioYuan2.isSelected()) {
-            this.cargarPonr(1);
-        }
-    }//GEN-LAST:event_radioYuanActionPerformed
-
-    private void radioKocisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioKocisActionPerformed
-
-        if (this.radioKocis2.isSelected()) {
-            this.cargarPonr(0);
-        }
-    }//GEN-LAST:event_radioKocisActionPerformed
-
     private void sliderIteracionesStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderIteracionesStateChanged
-        this.iteracionesDE = this.sliderIteraciones2.getValue();
-        this.lblIterED2.setText("" + iteracionesDE);
+        this.iteracionesED = this.sliderIteraciones2.getValue();
+        this.lblIterED2.setText("" + iteracionesED);
     }//GEN-LAST:event_sliderIteracionesStateChanged
 
     private void sliderIterBLStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderIterBLStateChanged
@@ -1243,51 +1163,51 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_lblGenMouseClicked
 
     private void btnDetenerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetenerActionPerformed
-        
-        configuracionRecomenda();         
-        
+
+        configuracionRecomenda();
+
     }//GEN-LAST:event_btnDetenerActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        configuracionRecomenda(); 
+        configuracionRecomenda();
         tbResultado.setModel(new javax.swing.table.DefaultTableModel(
-    new Object [][] {
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null},
-        {null, null, null}
-    },
-    new String [] {
-        "x1", "FO", "SVR"
-    }
-));
-        
+                new Object[][]{
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null}
+                },
+                new String[]{
+                    "x1", "FO", "SVR"
+                }
+        ));
+
         this.panelConvergencia.removeAll();
         this.repaint();
     }//GEN-LAST:event_btnNuevoActionPerformed
@@ -1295,6 +1215,15 @@ public class Inicio extends javax.swing.JFrame {
     private void txtCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCRActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCRActionPerformed
+
+    private void boxProblemasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxProblemasActionPerformed
+        
+        //Cargamos el problema seleccionado
+        int problemaSeleccionado = this.boxProblemas.getSelectedIndex();
+        this.cargarPonr(problemaSeleccionado);
+        
+        
+    }//GEN-LAST:event_boxProblemasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1356,13 +1285,13 @@ public class Inicio extends javax.swing.JFrame {
         this.cabecera[nColum] = "FO";
         this.cabecera[nColum + 1] = "SVR";
 
-        int filas = ed.getMejoresValores().length;
-        int columnas = ed.getMejoresValores()[0].length;
+        int filas = evolucionDiferencial.getMejoresValores().length;
+        int columnas = evolucionDiferencial.getMejoresValores()[0].length;
         Object[][] objectAux = new Object[filas][columnas];
 
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
-                objectAux[i][j] = ed.getMejoresValores()[i][j];
+                objectAux[i][j] = evolucionDiferencial.getMejoresValores()[i][j];
             }
         }
 
@@ -1376,34 +1305,34 @@ public class Inicio extends javax.swing.JFrame {
 
         int indiceFO = this.ponr.getNumVariables();
 
-        this.txtMejor.setText("" + this.estd.best(this.ed.getMejoresValores(), indiceFO));
-        this.txtPeor.setText("" + this.estd.worst(this.ed.getMejoresValores(), indiceFO));
-        this.txtMedia.setText("" + this.estd.mean(this.ed.getMejoresValores(), indiceFO));
-        this.txtMediana.setText("" + this.estd.median(this.ed.getMejoresValores(), indiceFO));
-        this.txtSTD.setText("" + this.estd.standardDeviation(this.ed.getMejoresValores(), indiceFO));
-        this.txtTasaFac.setText("" + this.estd.feasibleRate(this.ed.getMejoresValores(), indiceFO));
-        this.txtTasaExito.setText("" + this.estd.successRate(this.ed.getMejoresValores(), indiceFO, this.ponr.getMejorConocido()));
+        this.txtMejor.setText("" + this.estd.best(this.evolucionDiferencial.getMejoresValores(), indiceFO));
+        this.txtPeor.setText("" + this.estd.worst(this.evolucionDiferencial.getMejoresValores(), indiceFO));
+        this.txtMedia.setText("" + this.estd.mean(this.evolucionDiferencial.getMejoresValores(), indiceFO));
+        this.txtMediana.setText("" + this.estd.median(this.evolucionDiferencial.getMejoresValores(), indiceFO));
+        this.txtSTD.setText("" + this.estd.standardDeviation(this.evolucionDiferencial.getMejoresValores(), indiceFO));
+        this.txtTasaFac.setText("" + this.estd.feasibleRate(this.evolucionDiferencial.getMejoresValores(), indiceFO));
+        this.txtTasaExito.setText("" + this.estd.successRate(this.evolucionDiferencial.getMejoresValores(), indiceFO, this.ponr.getMejorConocido()));
 
     }
 
     private void cargarPonr(int problema) {
+        
+        switch (problema) {
+            case 0 -> this.ponr = new SintesisProcesosKocis98();
+            case 1 -> this.ponr = new SintesisProcesosYuan88();
+        } //cierra switch
 
-        if (problema == 0) {
-            this.ponr = new SintesisProcesosKocis98();
-        } else if (problema == 1) {
-            this.ponr = new SintesisProcesosYuan88();
-        }
 
         this.lblNombreProblema.setText(this.ponr.getNombre());
         this.txtD2.setText("" + this.ponr.getNumVariables());
         this.txtFX2.setText("1");
-        this.txtGX2.setText("" + this.ponr.getRestriccionesD().length);
+        this.txtGX2.setText("" + this.ponr.getResDesigualdad().length);
         this.txtHX2.setText("0");
 
         int contador = 0;
 
-        for (int i = 0; i < this.ponr.isExistePertenencia().length; i++) {
-            if (!this.ponr.isExistePertenencia()[i]) {
+        for (int i = 0; i < this.ponr.isVariableDiscreta().length; i++) {
+            if (!this.ponr.isVariableDiscreta()[i]) {
                 contador++;
             }
         }
@@ -1421,11 +1350,11 @@ public class Inicio extends javax.swing.JFrame {
         ChartPanel chartPane1;
 
         dataset = new DefaultXYDataset();
-        dataset.addSeries("Best Values ", this.ed.getConvergencia());
+        dataset.addSeries("Best Values ", this.evolucionDiferencial.getConvergencia());
 
         chart = null;
         chart = ChartFactory.createXYLineChart(
-                "Gráfica de convergencia de la ejecución " + ((this.iteracionesDE > 1) ? (int) this.iteracionesDE / 2 : 1) //this.problem.getNameProblem()
+                "Gráfica de convergencia de la ejecución " + ((this.iteracionesED > 1) ? (int) this.iteracionesED / 2 : 1) //this.problem.getNameProblem()
                 //"JMetaBFOP convergence for G09"
                 ,
                  "Generaciones",
@@ -1466,16 +1395,27 @@ public class Inicio extends javax.swing.JFrame {
      */
     private boolean esNumero(String cadena) {
         try {
-            Integer.parseInt(cadena);
+            Double.parseDouble(cadena);
             return true;
         } catch (NumberFormatException e) {
             return false;
         }
 
     }
-    
-    private void configuracionRecomenda () {
-        
+
+    /**
+     * Método que valida si el texto ingresado por el usuario es numerico y no
+     * es vacio.
+     *
+     * @param campo
+     * @return
+     */
+    private boolean validarCampo(String campo) {
+        return (this.esNumero(campo) && (!campo.isEmpty()));
+    }
+
+    private void configuracionRecomenda() {
+
         this.txtMaxPop.setText("50");
         this.txtCR.setText("0.45");
         this.txtF.setText("0.65");
@@ -1483,13 +1423,13 @@ public class Inicio extends javax.swing.JFrame {
         this.sliderIterBL.setValue(10);
         this.sliderProbabilidad.setValue(1);
         this.sliderIteraciones2.setValue(1);
-        
+
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> boxProblemas;
     private javax.swing.JButton btnDetener;
-    private javax.swing.ButtonGroup btnGrupo;
     private javax.swing.JButton btnIniciar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JPanel configuracion;
@@ -1510,7 +1450,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
@@ -1545,7 +1484,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JLabel lblCruz;
     private javax.swing.JLabel lblGen;
     private javax.swing.JLabel lblIterBL;
@@ -1558,8 +1496,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel panelConvergencia;
     private javax.swing.JPanel panelEstadisticas;
     private javax.swing.JPanel panelResultados;
-    private javax.swing.JRadioButton radioKocis2;
-    private javax.swing.JRadioButton radioYuan2;
     private javax.swing.JSlider sliderIterBL;
     private javax.swing.JSlider sliderIteraciones2;
     private javax.swing.JSlider sliderProbabilidad;

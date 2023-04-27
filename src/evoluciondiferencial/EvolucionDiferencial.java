@@ -128,7 +128,7 @@ public class EvolucionDiferencial {
 
                             //se mutan los tres individuos
                             //se pregunta si existe pertenencia en los rangos de variables
-                            if (ponr.isExistePertenencia()[j]) {
+                            if (ponr.isVariableDiscreta()[j]) {
                                 hijo[j] = (int) this.procesoEd.mutacion(this.individuos[ind[0]][j], this.individuos[ind[1]][j], this.individuos[ind[2]][j], this.getF());
                             } else {
                                 hijo[j] = this.procesoEd.mutacion(this.individuos[ind[0]][j], this.individuos[ind[1]][j], this.individuos[ind[2]][j], this.getF());
@@ -138,7 +138,7 @@ public class EvolucionDiferencial {
                             if ((hijo[j] < ponr.getRangos()[j][0])
                                     || (hijo[j] > ponr.getRangos()[j][1])) {
                                 
-                                if (ponr.isExistePertenencia()[j]) 
+                                if (ponr.isVariableDiscreta()[j]) 
                                     hijo[j] = (int)this.individuos[i][j];
                                 else hijo[j] = this.individuos[i][j];
 
@@ -168,11 +168,11 @@ public class EvolucionDiferencial {
                             double[] puntoCandidato = optimoLocal;
 
                             for (int j = 0; j < ponr.getNumVariables(); j++) {
-                                puntoCandidato[j] += (this.rnd.getRandomGaussian());
+                                puntoCandidato[j] += this.rnd.getRandomGaussian();
 
 //                                puntoCandidato[j] = puntoCandidato[j] + (Math.random() - 1) * 0.1;
 //                                System.out.println(this.rnd.getRandomGaussian());
-                                if (ponr.isExistePertenencia()[j]) {
+                                if (ponr.isVariableDiscreta()[j]) {
                                     puntoCandidato[j] = (int) Math.max(Math.min(puntoCandidato[j],
                                              ponr.getRangos()[j][1]),
                                              ponr.getRangos()[j][0]

@@ -20,7 +20,7 @@ public class SintesisProcesosKocis98 extends PONR{
             }
         );
         
-        this.setExistePertenencia(new boolean[]{
+        this.setVariableDiscreta(new boolean[]{
                 false,true
                 }
         );
@@ -31,8 +31,8 @@ public class SintesisProcesosKocis98 extends PONR{
         }
         );
         
-        this.setRestriccionesD(new double[2]);
-        this.setCompRestriccion(new double[]{
+        this.setResDesigualdad(new double[2]);
+        this.setComparacionRestriccion(new double[]{
                 0,1.6
             }
         );
@@ -61,15 +61,15 @@ public class SintesisProcesosKocis98 extends PONR{
         this.setSvr(0);
        
          
-        this.getRestriccionesD()[0] = - Math.pow(x[0], 2) - x[1] + 1.25;        
-        this.getRestriccionesD()[1] = x[0] + x[1];
+        this.getResDesigualdad()[0] = - Math.pow(x[0], 2) - x[1] + 1.25;        
+        this.getResDesigualdad()[1] = x[0] + x[1];
                                      
        
         //suma de violacion de restricciones
-        for (int i = 0; i < this.getRestriccionesD().length; i++) {   
+        for (int i = 0; i < this.getResDesigualdad().length; i++) {   
                       
             this.setSvr( this.getSvr() +  Math.max(0
-                    , (this.getRestriccionesD()[i] - this.getCompRestriccion()[i])
+                    , (this.getResDesigualdad()[i] - this.getCompRestriccion()[i])
                 ) 
             );              
         }

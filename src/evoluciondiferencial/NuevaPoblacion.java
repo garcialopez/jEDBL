@@ -19,7 +19,7 @@ public class NuevaPoblacion {
             
             for (int j = 0; j < ponr.getNumVariables(); j++) {
                 
-                if (ponr.isExistePertenencia()[j]) {
+                if (ponr.isVariableDiscreta()[j]) {
                     
                     int indice = NUMBER_RANDOM.getNetxInt(ponr.getRangos()[j].length);
                     
