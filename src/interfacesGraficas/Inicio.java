@@ -5,9 +5,8 @@ import estadisticas.Estadisticas;
 import evoluciondiferencial.EvolucionDiferencial;
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Shape;
-import java.awt.geom.Ellipse2D;
 import java.text.DecimalFormat;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
@@ -93,16 +92,14 @@ public class Inicio extends javax.swing.JFrame {
         txtF = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         txtGmax = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        lblPob = new javax.swing.JLabel();
+        lblCruz = new javax.swing.JLabel();
+        lblMut = new javax.swing.JLabel();
+        lblGen = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         sliderProbabilidad = new javax.swing.JSlider();
-        jLabel20 = new javax.swing.JLabel();
         lblIterBL = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
         sliderIterBL = new javax.swing.JSlider();
         lblPro = new javax.swing.JLabel();
         panelEstadisticas = new javax.swing.JPanel();
@@ -131,8 +128,6 @@ public class Inicio extends javax.swing.JFrame {
         radioKocis2 = new javax.swing.JRadioButton();
         radioYuan2 = new javax.swing.JRadioButton();
         lblIterED2 = new javax.swing.JLabel();
-        jLabel62 = new javax.swing.JLabel();
-        jLabel63 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
         jPanel15 = new javax.swing.JPanel();
         jLabel64 = new javax.swing.JLabel();
@@ -188,9 +183,19 @@ public class Inicio extends javax.swing.JFrame {
 
         btnDetener.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         btnDetener.setText("Configuración recomendada");
+        btnDetener.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetenerActionPerformed(evt);
+            }
+        });
 
         btnNuevo.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         btnNuevo.setText("Nuevo");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -374,9 +379,16 @@ public class Inicio extends javax.swing.JFrame {
 
         txtMaxPop.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtMaxPop.setText("50");
+        txtMaxPop.setToolTipText("Valores permitidos entre 10 y 500.");
 
         txtCR.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtCR.setText("0.45");
+        txtCR.setToolTipText("Valores permitidos entre 0 y 1.");
+        txtCR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCRActionPerformed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel11.setText("Cruza");
@@ -386,36 +398,58 @@ public class Inicio extends javax.swing.JFrame {
 
         txtF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtF.setText("0.65");
+        txtF.setToolTipText("Valores permitidos entre 0 y 1.");
 
         jLabel13.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel13.setText("Generaciones");
 
         txtGmax.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtGmax.setText("400");
+        txtGmax.setToolTipText("Valores permitidos entre 100 y 1000. ");
 
-        jLabel14.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("MAX_POP");
-        jLabel14.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.blue));
-        jLabel14.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblPob.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        lblPob.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPob.setText("MAX_POP");
+        lblPob.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.blue));
+        lblPob.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblPob.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblPobMouseClicked(evt);
+            }
+        });
 
-        jLabel15.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("CR");
-        jLabel15.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.blue));
-        jLabel15.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblCruz.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        lblCruz.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCruz.setText("CR");
+        lblCruz.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.blue));
+        lblCruz.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblCruz.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCruzMouseClicked(evt);
+            }
+        });
 
-        jLabel16.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setText("F");
-        jLabel16.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.blue));
-        jLabel16.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblMut.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        lblMut.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMut.setText("F");
+        lblMut.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.blue));
+        lblMut.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblMut.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblMutMouseClicked(evt);
+            }
+        });
 
-        jLabel17.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setText("GMAX");
-        jLabel17.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.blue));
-        jLabel17.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblGen.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        lblGen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblGen.setText("GMAX");
+        lblGen.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.blue));
+        lblGen.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblGen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblGenMouseClicked(evt);
+            }
+        });
 
         jLabel18.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel18.setText("Probabilidad de BL");
@@ -434,24 +468,12 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        jLabel20.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel20.setText("PRO_BUS");
-        jLabel20.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.blue));
-        jLabel20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
         lblIterBL.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblIterBL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIterBL.setText("10");
 
         jLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel19.setText("Iteraciones para BL");
-
-        jLabel21.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel21.setText("MAX_ITER");
-        jLabel21.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.blue));
-        jLabel21.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         sliderIterBL.setBackground(new java.awt.Color(245, 245, 245));
         sliderIterBL.setMajorTickSpacing(10);
@@ -481,13 +503,13 @@ public class Inicio extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(txtMaxPop, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel14))
+                        .addComponent(lblPob))
                     .addGroup(panelAjusteLayout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addGap(47, 47, 47)
                         .addComponent(txtCR, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblCruz, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelAjusteLayout.createSequentialGroup()
                         .addGroup(panelAjusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAjusteLayout.createSequentialGroup()
@@ -500,16 +522,15 @@ public class Inicio extends javax.swing.JFrame {
                                 .addComponent(txtGmax, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelAjusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(lblMut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblGen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGroup(panelAjusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelAjusteLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(panelAjusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelAjusteLayout.createSequentialGroup()
                                 .addComponent(jLabel19)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel21))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(panelAjusteLayout.createSequentialGroup()
                                 .addComponent(sliderIterBL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -521,8 +542,7 @@ public class Inicio extends javax.swing.JFrame {
                     .addGroup(panelAjusteLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel20)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelAjusteLayout.setVerticalGroup(
@@ -534,17 +554,15 @@ public class Inicio extends javax.swing.JFrame {
                         .addGroup(panelAjusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
                             .addComponent(txtMaxPop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14))
+                            .addComponent(lblPob))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelAjusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtCR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11)
-                            .addComponent(jLabel15)))
+                            .addComponent(lblCruz)))
                     .addGroup(panelAjusteLayout.createSequentialGroup()
-                        .addGroup(panelAjusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel18)
-                            .addComponent(jLabel20))
-                        .addGap(4, 4, 4)
+                        .addComponent(jLabel18)
+                        .addGap(5, 5, 5)
                         .addGroup(panelAjusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(sliderProbabilidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblPro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -552,9 +570,8 @@ public class Inicio extends javax.swing.JFrame {
                 .addGroup(panelAjusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(txtF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel21))
+                    .addComponent(lblMut)
+                    .addComponent(jLabel19))
                 .addGroup(panelAjusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelAjusteLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -563,7 +580,7 @@ public class Inicio extends javax.swing.JFrame {
                                 .addGroup(panelAjusteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel13)
                                     .addComponent(txtGmax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel17))
+                                    .addComponent(lblGen))
                                 .addGap(9, 9, 9))
                             .addComponent(sliderIterBL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panelAjusteLayout.createSequentialGroup()
@@ -785,18 +802,6 @@ public class Inicio extends javax.swing.JFrame {
         lblIterED2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIterED2.setText("1");
 
-        jLabel62.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        jLabel62.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel62.setText("VER");
-        jLabel62.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.blue));
-        jLabel62.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        jLabel63.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        jLabel63.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel63.setText("VER");
-        jLabel63.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.blue));
-        jLabel63.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
@@ -808,22 +813,19 @@ public class Inicio extends javax.swing.JFrame {
                     .addComponent(jLabel61, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addComponent(jLabel62)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(radioKocis2))
-                            .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addComponent(jLabel63)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(radioYuan2))
                             .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel16Layout.createSequentialGroup()
                                 .addComponent(jLabel60)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(sliderIteraciones2, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblIterED2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(lblIterED2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel16Layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(radioKocis2)
+                                    .addComponent(radioYuan2))))
+                        .addGap(0, 13, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel16Layout.setVerticalGroup(
@@ -841,14 +843,10 @@ public class Inicio extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addComponent(jLabel61)
                 .addGap(3, 3, 3)
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel62)
-                    .addComponent(radioKocis2))
+                .addComponent(radioKocis2)
                 .addGap(3, 3, 3)
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radioYuan2)
-                    .addComponent(jLabel63))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addComponent(radioYuan2)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Configuración inicial", jPanel16);
@@ -963,7 +961,7 @@ public class Inicio extends javax.swing.JFrame {
                                 .addComponent(jLabel64)
                                 .addGap(68, 68, 68)
                                 .addComponent(txtD2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel15Layout.createSequentialGroup()
                                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1144,27 +1142,59 @@ public class Inicio extends javax.swing.JFrame {
         //String nombreEjecucion = this.txtNombreEjecucion.getText();
         this.ed = new EvolucionDiferencial();
 
-        //parametros para ED.
-        int maxPop = Integer.parseInt(this.txtMaxPop.getText());
-        double f = Double.parseDouble(this.txtF.getText());
-        double cr = Double.parseDouble(this.txtCR.getText());
-        int gmax = Integer.parseInt(this.txtGmax.getText());
+        String pob = this.txtMaxPop.getText();
+        String cruza = this.txtCR.getText();
+        String mutacion = this.txtF.getText();
+        String gmaxTxt = this.txtGmax.getText();
 
-        ed.setPoblacion(maxPop);
-        ed.setF(f);
-        ed.setCR(cr);
-        ed.setGmax(gmax);
+        //estructura condicional
+        if ((!esNumero(pob) || pob.isEmpty()
+                && !esNumero(cruza) || cruza.isEmpty()
+                && !esNumero(mutacion) || mutacion.isEmpty()
+                && !esNumero(gmaxTxt) || gmaxTxt.isEmpty())) {
 
-        //Parámetros para BL
-        ed.setPRO_BUS(this.probabilidadBL);
-        ed.setMAX_ITER(this.iteracionesBL);
+            //verdadero
+            JOptionPane.showMessageDialog(null, "Verificar que los valores ingresados sean de tipo numérico.");
+        } else {
 
-        ed.iniciar(ponr, this.iteracionesDE);
+            //falso
+            int maxPop = Integer.parseInt(pob);
+            double f = Double.parseDouble(this.txtF.getText());
+            double cr = Double.parseDouble(this.txtCR.getText());
+            int gmax = Integer.parseInt(this.txtGmax.getText());
 
-        this.mostrarTabla();
-        this.mostrarEstadisticas();
-        this.mostrarGrafica();
-        this.btnIniciar.setEnabled(true);
+//            
+            if ((maxPop >= 10 && maxPop <= 500) 
+                    && (f >=0 && f <=1 )
+                    && (cr >=0 && cr <=1)
+                    && (gmax >=100 && gmax <=1000)
+                )  {
+
+                ed.setPoblacion(maxPop);
+                ed.setF(f);
+                ed.setCR(cr);
+                ed.setGmax(gmax);
+
+                //Parámetros para BL
+                ed.setPRO_BUS(this.probabilidadBL);
+                ed.setMAX_ITER(this.iteracionesBL);
+
+                ed.iniciar(ponr, this.iteracionesDE);
+
+                this.mostrarTabla();
+                this.mostrarEstadisticas();
+                this.mostrarGrafica();
+                this.btnIniciar.setEnabled(true);
+
+//                JOptionPane.showMessageDialog(null, "dentro del limite");
+            } else {
+                JOptionPane.showMessageDialog(null, "Verifique los límites en las etiquetas correspondientes. ");
+            }
+
+        } // cierra else
+
+
+
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void radioYuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioYuanActionPerformed
@@ -1195,6 +1225,76 @@ public class Inicio extends javax.swing.JFrame {
         this.probabilidadBL = (double) this.sliderProbabilidad.getValue() / 10;
         this.lblPro.setText("" + probabilidadBL);
     }//GEN-LAST:event_sliderProbabilidadStateChanged
+
+    private void lblPobMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPobMouseClicked
+        JOptionPane.showMessageDialog(null, "Valores permitidos entre 10 y 500.");
+    }//GEN-LAST:event_lblPobMouseClicked
+
+    private void lblCruzMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCruzMouseClicked
+        JOptionPane.showMessageDialog(null, "Valores permitidos entre 0 y 1.");
+    }//GEN-LAST:event_lblCruzMouseClicked
+
+    private void lblMutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMutMouseClicked
+        JOptionPane.showMessageDialog(null, "Valores permitidos entre 0 y 1.");
+    }//GEN-LAST:event_lblMutMouseClicked
+
+    private void lblGenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblGenMouseClicked
+        JOptionPane.showMessageDialog(null, "Valores permitidos entre 100 y 1000.");
+    }//GEN-LAST:event_lblGenMouseClicked
+
+    private void btnDetenerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetenerActionPerformed
+        
+        configuracionRecomenda();         
+        
+    }//GEN-LAST:event_btnDetenerActionPerformed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        configuracionRecomenda(); 
+        tbResultado.setModel(new javax.swing.table.DefaultTableModel(
+    new Object [][] {
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null},
+        {null, null, null}
+    },
+    new String [] {
+        "x1", "FO", "SVR"
+    }
+));
+        
+        this.panelConvergencia.removeAll();
+        this.repaint();
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void txtCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCRActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCRActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1325,13 +1425,13 @@ public class Inicio extends javax.swing.JFrame {
 
         chart = null;
         chart = ChartFactory.createXYLineChart(
-                "Gráfica de convergencia de la ejecución " + ((this.iteracionesDE>1)?(int)this.iteracionesDE/2:1) //this.problem.getNameProblem()
+                "Gráfica de convergencia de la ejecución " + ((this.iteracionesDE > 1) ? (int) this.iteracionesDE / 2 : 1) //this.problem.getNameProblem()
                 //"JMetaBFOP convergence for G09"
                 ,
                  "Generaciones",
-                 "Función objetivo",
-                 dataset,
-                 PlotOrientation.VERTICAL, false, true, false);
+                "Función objetivo",
+                dataset,
+                PlotOrientation.VERTICAL, false, true, false);
 
         ((NumberAxis) chart.getXYPlot().getRangeAxis()).setNumberFormatOverride(new DecimalFormat("#.###############"));
 
@@ -1358,6 +1458,35 @@ public class Inicio extends javax.swing.JFrame {
         chartPane.setBounds(0, 0, panel.getWidth(), panel.getHeight());
     }
 
+    /**
+     * Método para validar que una cadena de texto sea numerico
+     *
+     * @param cadena
+     * @return
+     */
+    private boolean esNumero(String cadena) {
+        try {
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+    }
+    
+    private void configuracionRecomenda () {
+        
+        this.txtMaxPop.setText("50");
+        this.txtCR.setText("0.45");
+        this.txtF.setText("0.65");
+        this.txtGmax.setText("400");
+        this.sliderIterBL.setValue(10);
+        this.sliderProbabilidad.setValue(1);
+        this.sliderIteraciones2.setValue(1);
+        
+    }
+    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDetener;
     private javax.swing.ButtonGroup btnGrupo;
@@ -1369,15 +1498,9 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
@@ -1400,8 +1523,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
-    private javax.swing.JLabel jLabel62;
-    private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel65;
     private javax.swing.JLabel jLabel66;
@@ -1425,9 +1546,13 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JLabel lblCruz;
+    private javax.swing.JLabel lblGen;
     private javax.swing.JLabel lblIterBL;
     private javax.swing.JLabel lblIterED2;
+    private javax.swing.JLabel lblMut;
     private javax.swing.JLabel lblNombreProblema;
+    private javax.swing.JLabel lblPob;
     private javax.swing.JLabel lblPro;
     private javax.swing.JPanel panelAjuste;
     private javax.swing.JPanel panelConvergencia;
